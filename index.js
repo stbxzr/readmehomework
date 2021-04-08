@@ -8,7 +8,6 @@ const util = require("util");
 init();
 
 promptUser().then(function (data) {
-  console.log("here");
   writeToFile(data);
 });
 
@@ -16,41 +15,26 @@ function promptUser() {
   return inquirer.prompt([
     {
       type: "input",
-      name: "name",
-      message: "What is your name?",
+      name: "titleP",
+      message: "What is your project name?",
     },
     {
       type: "input",
-      name: "location",
-      message: "Where are you from?",
+      name: "descriptionP",
+      message: "Describe your project.",
     },
-    {
-      type: "input",
-      name: "hobby",
-      message: "What is your favorite hobby?",
-    },
-    {
-      type: "input",
-      name: "food",
-      message: "What is your favorite food?",
-    },
-    {
-      type: "input",
-      name: "github",
-      message: "Enter your GitHub Username",
-    },
-    {
-      type: "input",
-      name: "linkedin",
-      message: "Enter your LinkedIn URL.",
-    },
+ 
   ]);
 }
 
 // TODO: Create a function to write README file
 function writeToFile(data) {
   const fileName = "README.md";
-  let fileString = "# Project Title";
+  let fileString = `# ${data.titleP}
+## Description
+${data.descriptionP}
+  `;
+
 
   fs.writeFile(fileName, fileString, (err) =>
     err ? console.log(err) : console.log("Generated")
